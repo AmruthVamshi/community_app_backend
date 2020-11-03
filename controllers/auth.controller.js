@@ -16,7 +16,7 @@ exports.login = async(req,res)=>{
 			id:UserFound.id,
             userName:UserFound.userName,
             houseNumber:UserFound.houseNumber
-        },process.env.AUTH_KEY)
+        },process.env.AUTH_KEY||'thisaverrysecretkey')
         //sending response
         res.status(200).json({
             message:"Successfully loggedin !",
