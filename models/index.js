@@ -1,6 +1,7 @@
 //importing config and sequelize
 const dbConfig = require('../config/db.config.js');
 const Sequelize = require('sequelize');
+require('dotenv').config();
 //connecting to sequelize
 /*
 const sequelize = new Sequelize(dbConfig.DB,dbConfig.USER,dbConfig.PASSWORD,{
