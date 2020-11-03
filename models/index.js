@@ -15,7 +15,7 @@ const sequelize = new Sequelize(dbConfig.DB,dbConfig.USER,dbConfig.PASSWORD,{
 	}
 });
 */
-const sequelize = new Sequelize(process.env.HEROKU_URL, {
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
     dialect:  'postgres',
     protocol: 'postgres',
     port:     5432
