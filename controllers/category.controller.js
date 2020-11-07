@@ -43,7 +43,7 @@ exports.getAllCategories=async(req,res)=>{
             })
         })
     } catch (error) {
-        res.status(500).json({
+        res.status(203).json({
             message:"some error occured!",
             error
         })
@@ -62,7 +62,7 @@ exports.createCategory=async(req,res)=>{
             category
         })
     } catch (error) {
-        res.status(500).json({
+        res.status(203).json({
             message:"some error occured!",
             error
         })
@@ -83,7 +83,7 @@ exports.deleteCategory=async(req,res)=>{
             message:`Deleted ${categoryName} category!`
         })
     } catch (error) {
-        res.status(500).json({
+        res.status(203).json({
             message:"some error occured!",
             error
         })

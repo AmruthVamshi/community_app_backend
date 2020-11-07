@@ -1,4 +1,3 @@
-const { response } = require('express');
 const {User} = require('../models');
 
 exports.get = async(req,res)=>{
@@ -14,7 +13,7 @@ exports.get = async(req,res)=>{
             }
         })
     } catch (error) {
-        res.status(500).json({
+        res.status(203).json({
             message:'Some error occured',
             error
         })
@@ -30,7 +29,7 @@ exports.update = async(req,res)=>{
             })
         }throw 'Could not update your profile'
     } catch (error) {
-        res.status(500).json({
+        res.status(203).json({
             message:'Some error occured',
             error
         })

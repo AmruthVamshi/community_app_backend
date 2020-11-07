@@ -18,7 +18,7 @@ exports.create=async(req,res)=>{
             complaint:response
         })
     } catch (error) {
-        res.status(500).json({
+        res.status(203).json({
             message:'some error occured!',
             error
         })
@@ -105,7 +105,7 @@ exports.get=async(req,res)=>{
         })
     } catch (error) {
         console.log(error)
-        res.status(500).json({
+        res.status(203).json({
             message:'some error occured!',
             error
         })
@@ -121,7 +121,7 @@ exports.update=async(req,res)=>{
         })
     } catch (error) {
         console.log(error)
-        res.status(500).json({
+        res.status(203).json({
             message:'some error occured!',
             error
         })

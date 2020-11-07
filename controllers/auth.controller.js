@@ -23,7 +23,7 @@ exports.login = async(req,res)=>{
             token
         })
     } catch (error) {
-        res.status(500).json({
+        res.status(203).json({
             message:"Some error occured!",
             error
         })
@@ -57,7 +57,7 @@ exports.register = async(req,res)=>{
             user
         })
     } catch (error) {
-        res.status(500).json({
+        res.status(203).json({
             message:"Some error occured!",
             error
         })
@@ -81,7 +81,7 @@ exports.adminLogin = async(req,res)=>{
             token
         })
     } catch (error) {
-        res.status(500).json({
+        res.status(203).json({
             message:"Some error occured!",
             error
         })
