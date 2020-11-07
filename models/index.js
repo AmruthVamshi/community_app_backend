@@ -2,8 +2,8 @@
 const dbConfig = require('../config/db.config.js');
 const Sequelize = require('sequelize');
 require('dotenv').config();
-//connecting to sequelize
 /*
+//connecting to sequelize
 const sequelize = new Sequelize(dbConfig.DB,dbConfig.USER,dbConfig.PASSWORD,{
 	host:dbConfig.HOST,
 	dialect:dbConfig.dialect,
@@ -20,14 +20,30 @@ const sequelize = new Sequelize(process.env.DATABASE_URL, {
     protocol: 'postgres',
     port:     5432
   })
+
 //importing all models
 const User=require('./user.model')(sequelize,Sequelize);
+const ComplaintCategory = require('./complaintCategory.model')(sequelize,Sequelize);
+const Complaint = require('./complaint.model')(sequelize,Sequelize);
 
 //crating relations between tables
+ComplaintCategory.hasMany(Complaint, {as:"complaint"});
+Complaint.belongsTo(ComplaintCategory,{
+	foreignKey:"categoryId",
+	as:"category"
+});
+
+User.hasMany(Complaint, {as:"complaint"});
+Complaint.belongsTo(User,{
+	foreignKey:"userId",
+	as:"linkedUser"
+});
 
 //exporting all models
 module.exports = {
 	Sequelize,
 	sequelize,
-	User
+	User,
+	ComplaintCategory,
+	Complaint
 }

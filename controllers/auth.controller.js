@@ -16,14 +16,14 @@ exports.login = async(req,res)=>{
 			id:UserFound.id,
             userName:UserFound.userName,
             houseNumber:UserFound.houseNumber
-        },process.env.AUTH_KEY||'thisaverrysecretkey')
+        },process.env.AUTH_KEY)
         //sending response
         res.status(200).json({
             message:"Successfully loggedin !",
             token
         })
     } catch (error) {
-        res.status(404).json({
+        res.status(500).json({
             message:"Some error occured!",
             error
         })
@@ -57,7 +57,31 @@ exports.register = async(req,res)=>{
             user
         })
     } catch (error) {
-        res.status(404).json({
+        res.status(500).json({
+            message:"Some error occured!",
+            error
+        })
+    }
+}
+
+exports.adminLogin = async(req,res)=>{
+    try {
+        const {username, password } = req.body;
+        //validation
+		if(username!=='Admin') throw 'invalid username';
+		if(password!==process.env.ADMIN_PASSWORD) throw 'incorrect password';
+		//signing in user
+		const token = jwt.sign({
+            userName:username,
+            role:'Admin',
+        },process.env.AUTH_KEY)
+        //sending response
+        res.status(200).json({
+            message:"Successfully loggedin as admin!",
+            token
+        })
+    } catch (error) {
+        res.status(500).json({
             message:"Some error occured!",
             error
         })
