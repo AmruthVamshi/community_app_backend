@@ -8,7 +8,7 @@ exports.create=async(req,res)=>{
         if(!foundCategory) throw 'Invalid complaint category!'
         let response = await Complaint.create({
             complaint,
-            status:'On Waiting List',
+            status:'Not Seen',
             categoryId:foundCategory.id,
             userId:req.user.id,
             complaintCategoryId:foundCategory.id
