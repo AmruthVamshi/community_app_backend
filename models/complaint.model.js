@@ -7,7 +7,11 @@ module.exports = (sequelize,Sequelize) => {
         status:{
             type:Sequelize.STRING,
             allowNull:false
-        }
+		},
+		isResolved:{
+			type:Sequelize.BOOLEAN,
+			defaultValue:false
+		}
 	});
 	return Complaint;
 }

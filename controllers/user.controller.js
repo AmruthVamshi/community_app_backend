@@ -1,4 +1,6 @@
 const {User, Complaint, ComplaintCategory} = require('../models');
+const bcrypt = require('bcryptjs');
+require('dotenv').config();
 
 exports.get = async(req,res)=>{
     try {
@@ -73,6 +75,32 @@ exports.getComplaints = async(req,res)=>{
         })
         
     } catch (error) {
+        res.status(203).json({
+            message:'Some error occured',
+            error
+        })
+    }
+}
+
+exports.changePassword = async(req,res)=>{
+    try {
+        const {password, retypePassword} = req.body;
+        //validation
+        if(password.length<6) throw 'password should be greater than 6 characters!';
+        if(password!=retypePassword) throw 'passwords does not match!';
+        //encrypt password
+        let salt = await bcrypt.genSalt(10);
+		let encrypter_password = await bcrypt.hash(password,salt);
+        //add to database
+        let response = await User.update({password:encrypter_password},{where:{id:req.user.id}});
+        if(response){
+            res.status(200).json({
+                message:'succesfully updated'
+            })
+        }throw 'Could not update your profile'
+
+    } catch (error) {
+        console.log(error)
         res.status(203).json({
             message:'Some error occured',
             error

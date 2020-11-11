@@ -112,12 +112,19 @@ exports.get=async(req,res)=>{
     }
 }
 
-exports.update=async(req,res)=>{
+exports.delete=async(req,res)=>{
     try {
-        let response = await complaint.update(req,body,{where:{id:req.params.id}});
-        if(!response) throw 'Could not update the complaint';
+        let comp = await Complaint.findOne({
+            where:{
+                id:req.params.id
+            },
+            include:['linkedUser']
+        });
+        if(comp.linkedUser.id!==req.user.id) throw 'You cannot delete this complaint!'
+        let response = await Complaint.destroy({where:{id:req.params.id}});
+        if(!response) throw 'Could not delete the complaint';
         res.status(200).json({
-            message:'sucessfully updated the complaint'
+            message:'sucessfully deleted the complaint'
         })
     } catch (error) {
         console.log(error)

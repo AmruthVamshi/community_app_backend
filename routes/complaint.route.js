@@ -4,6 +4,6 @@ const {verifyLogin} = require('../middlewares');
 
 Router.get('/',complaintController.get);
 Router.post('/create',verifyLogin.verifyUser,complaintController.create);
-Router.patch('/update/:id',verifyLogin.verifyAdmin,complaintController.update);
+Router.delete('/delete/:id',verifyLogin.verifyUser,complaintController.delete);
 
 module.exports = Router;
