@@ -120,7 +120,8 @@ exports.delete=async(req,res)=>{
             },
             include:['linkedUser']
         });
-        if(comp.linkedUser.id!==req.user.id) throw 'You cannot delete this complaint!'
+        console.log(comp.linkedUser.id,req.user.id)
+        if(comp.linkedUser.id!=req.user.id) throw 'You cannot delete this complaint!'
         let response = await Complaint.destroy({where:{id:req.params.id}});
         if(!response) throw 'Could not delete the complaint';
         res.status(200).json({
